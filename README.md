@@ -226,7 +226,6 @@ Their are multiples ways of computing the threshold to use. The most two famous 
   ">
 </p>
 
-<br/>
 
 #### Soft/Hard Thresholding
 
