@@ -187,12 +187,46 @@ To denoise a signal one simply needs to denoise the details coefficients:
 </p>
 
 
-#### Threshold
+#### Thresholds
+
+Their are multiples ways of computing the threshold to use. The most two famous are:
+* Universal threshold (default)
+* SURE threshold
+
+<ins>Universal threshold</ins>
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A%5Clambda_%7Buniversal%7D+%3D+%5Csqrt%7B2%2Alog%28N%29%7D%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  \lambda_{universal} = \sqrt{2*log(N)}
+  \end{align*}
+  ">
+</p>
+
+
+<ins>SURE threshold</ins>
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A%5Clambda_%7BSURE%7D+%3D+argmin_%7B0%3C%5Clambda%3C%5Clambda_%7Buniversal%7D%7DSURE%28%5Clambda%2Cx%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  \lambda_{SURE} = argmin_{0<\lambda<\lambda_{universal}}SURE(\lambda,x)
+  \end{align*}
+">
+  
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0ASURE%28%5Clambda%2Cx%29+%3D+s+%2B+%5Csum_%7Bi%3D1%7D%5Es+%5Bmin%28%5Cmid+X_i%5Cmid%2C+%5Clambda%29%5D%5E2-2card%28i%3A%5Cmid+X_i%5Cmid+%3C%5Clambda%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  SURE(\lambda,x) = s + \sum_{i=1}^s [min(\mid X_i\mid, \lambda)]^2-2card(i:\mid X_i\mid <\lambda)
+  \end{align*}
+  ">
+</p>
 
 
 #### Soft/Hard Thresholding
 
-To denoise a signal one simply needs to denoise the details coefficients:
+Two types of thresholding exists:
+* Soft - Every values above the treshold is shrinken by the threshold value (default)
+* Hard - Every values below the treshold is shrinken to 0
 
 <p align="center">
   <img src="./Images/Threshold_Types.png" />
