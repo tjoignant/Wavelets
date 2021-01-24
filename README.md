@@ -73,16 +73,16 @@ The daubechie wavelet's are orthognal with a compact support. Their are the more
   ">
 </p>
 
-*Tip: To reduce computing time one can take*
+*Tip: To reduce computing time one can take* 
+<img src=
+"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A++++k+%5Cin+%5B-2%5Ej+T%3B2%5Ej+T%5D%0A%5Cend%7Balign%2A%7D%0A" 
+alt="\begin{align*}
+    k \in [-2^j T;2^j T]
+\end{align*}
+">
 
-<br/>
 
 ### Mexican Hat
 
-Not implemented yet ...
+Yet to be implemented ...
 
-
-
-#### Discrete Wavelet Transformation (dwt)
-
-#### Inverse Discrete Transformation (idwt)
