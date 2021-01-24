@@ -44,6 +44,8 @@ The daubechie wavelet's are orthognal with a compact support. Their are the more
 
 *Tip: To construct the father wavelet we use a cascade algorithm*
 
+<br/>
+
 #### Mother Wavelet
 <p align="center">
   <img src=
@@ -81,8 +83,27 @@ alt="\begin{align*}
 \end{align*}
 ">
 
+<br/>
 
 ### Mexican Hat
 
 Yet to be implemented ...
 
+
+<br/>
+
+## Decomposition/Recomposition
+
+Using a discrete Wavelet (Daubechie for example) one can easily decompose and recompose perfectly the signal by doing the following steps:
+
+### Discrete Wavelet Transform (dwt)
+
+### Inverse Discrete Wavelet Transform (idwt)
+
+### Signal Recomposition
+
+### Example
+
+<br/>
+
+## Signal Denoising
