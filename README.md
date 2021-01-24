@@ -10,7 +10,7 @@ Definition: small wave with a defined start and end
 
 Usage: to represent a signal as the sum of small dilated and translated waves
 
-[insert wavelets examples]
+[insert wavelets examples](./Images/Wavelets_Examples.png)
 
 *Why do we use wavelets ?*
 
