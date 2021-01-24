@@ -125,7 +125,6 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   ">
 </p>
 
-<br/>
 
 #### Inverse Discrete Wavelet Transform (idwt)
 <p align="center">
@@ -146,7 +145,6 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   ">
 </p>
 
-<br/>
 
 #### Signal Recomposition
 <p align="center">
@@ -158,7 +156,6 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   ">
 </p>
 
-<br/>
 
 #### Examples
 
