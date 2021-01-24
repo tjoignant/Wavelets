@@ -42,7 +42,7 @@ The daubechie wavelet's are orthognal with a compact support. Their are the more
   ">
 </p>
 
-*Tip: To construct the father wavelet we use a cascade algorithm*
+*Note: To construct the father wavelet we use a cascade algorithm*
 
 <br/>
 
@@ -75,7 +75,7 @@ The daubechie wavelet's are orthognal with a compact support. Their are the more
   ">
 </p>
 
-*Tip: To reduce computing time one can take* 
+*Note: To reduce computing time one can take* 
 <img src=
 "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A++++k+%5Cin+%5B-2%5Ej+T%3B2%5Ej+T%5D%0A%5Cend%7Balign%2A%7D%0A" 
 alt="\begin{align*}
@@ -173,7 +173,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   <b>Fig.4</b> - Daubechie_4 Decomposition/Recomposition
 </p>
 
-*Tip: Use main_signal.py to plot thoses graphs*
+*Note: Use main_signal.py to plot thoses graphs*
 
 
 <br/>
@@ -236,7 +236,7 @@ Two types of thresholding exists:
 <p align="center">
   <img src="./Images/Threshold_Types.png" />
   <br/>
-  <b>Fig.6</b> - Threshold_Types
+  <b>Fig.6</b> - Threshold Types
 </p>
 
 <br/>
@@ -249,6 +249,72 @@ Two types of thresholding exists:
   <b>Fig.7</b> - Daubechie_4 Denoising
 </p>
 
-*Tip: Use main_denoising.py to plot this graph*
+*Note: Use main_denoising.py to plot thoses graphs*
 
 
+## 5 - Density Estimation
+
+One can take as an input signal a stock's returns and estimate it's Probability Distribution Function using the wavelet analysis. Once again, it exists multiples wavelet density estimators, we will see the two of them:
+* Linear estimator (easiest)
+* Donoho & Al estimator (thresholded)
+
+#### Scaling Coefficients
+
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A%5Chat%7Bc%7D_%7Bj%2Ck%7D+%3D+%5Cfrac%7B1%7D%7Bn%7D+%5Csum_%7Bi%3D1%7D%5En+%5Cphi_%7Bj%2Ck%7D%28X_i%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  \hat{c}_{j,k} = \frac{1}{n} \sum_{i=1}^n \phi_{j,k}(X_i)
+  \end{align*}
+  ">
+</p>
+
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A%5Chat%7Bd%7D_%7Bj%2Ck%7D+%3D+%5Cfrac%7B1%7D%7Bn%7D+%5Csum_%7Bi%3D1%7D%5En+%5Cpsi_%7Bj%2Ck%7D%28X_i%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  \hat{d}_{j,k} = \frac{1}{n} \sum_{i=1}^n \psi_{j,k}(X_i)
+  \end{align*}
+  ">
+</p>
+
+#### Estimators
+
+<ins>Linear</ins>
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A%5Chat%7Bf%7D%28x%29+%3D+%5Csum_k+%5Chat%7Bc%7D_%7Bj%2Ck%7D+%5Cphi_%7Bj%2Ck%7D%28x%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  \hat{f}(x) = \sum_k \hat{c}_{j,k} \phi_{j,k}(x)
+  \end{align*}
+  ">
+</p>
+
+<ins>Donoho & Al</ins>
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A%5Chat%7Bf%7D+%28x%29+%3D+%5Csum_k+%5Chat%7Bc%7D_%7Bj%2Ck%7D+%5Cphi_%7Bj%2Ck%7D+%28x%29+%2B+%5Csum_%7Bj0%7D%5E%7Bj1%7D+%5Csum_k+%5Ctilde%7Bd%7D_%7Bj%2Ck%7D+%5Cpsi_%7Bj%2Ck%7D%28x%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  \hat{f} (x) = \sum_k \hat{c}_{j,k} \phi_{j,k} (x) + \sum_{j0}^{j1} \sum_k \tilde{d}_{j,k} \psi_{j,k}(x)
+  \end{align*}
+  ">
+</p>
+
+*Note:* <img src=
+"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A%5Ctilde%7Bd%7D_%7Bj%2Ck%7D+%3D+%5Chat%7Bd%7D_%7Bj%2Ck%7D++%5C%3B+denoised%0A%5Cend%7Balign%2A%7D%0A" 
+alt="\begin{align*}
+\tilde{d}_{j,k} = \hat{d}_{j,k}  \; denoised
+\end{align*}
+">
+
+
+#### Example
+
+<p align="center">
+  <img src="./Images/Density_Estimation.png" />
+  <br/>
+  <b>Fig.8</b> - Density Estimations
+</p>
+
+
+*Note: Use main_densities.py to plot thoses graphs*
