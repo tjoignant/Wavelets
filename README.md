@@ -18,12 +18,43 @@ Small wave with a defined start and end. A signal can be reconstructed as the su
 
 *Why do we use wavelets ?* <br/>
 
-Break down a signal into 2 components of various scales and frequencies. Financial applications:<br/>
- * Denoising
- * Singularity prediction
- * Detection of frequency patterns
- * ...
+Break down a signal into 2 components of various scales and frequencies. Financial applications:
+* Denoising
+* Singularity prediction
+* Detection of frequency patterns
+* ...
 
 <br/>
 
-## Discrete Transformation
+## Building the Wavelets
+
+### Daubechie
+
+The daubechie wavelet's are orthognal with a compact support. Their are the more commonly used for the discrete wavelet transformation.
+
+<br/>
+
+#### Father Wavelet
+
+<img src="https://render.githubusercontent.com/render/math?math=\phi_{j, k}(u_t} = -1">
+
+#### Mother Wavelet
+
+#### Derived Wavelets
+
+<img src=
+"https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A+++++%5Cphi_%7Bj%2Ck%7D%28u_k%29+%3D+2%5E%7Bj%2F2%7D%5CPhi%282%5Ej+u_t+-+k%29%0A%5Cend%7Balign%2A%7D%0A" 
+alt="\begin{align*}
+     \phi_{j,k}(u_k) = 2^{j/2}\Phi(2^j u_t - k)
+\end{align*}
+">
+
+### Mexican Hat
+
+Not implemented yet ...
+
+
+
+#### Discrete Wavelet Transformation (dwt)
+
+#### Inverse Discrete Transformation (idwt)
