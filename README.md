@@ -173,7 +173,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   <b>Fig.4</b> - Daubechie_4 Decomposition/Recomposition
 </p>
 
-*Note: Use main_signal.py to plot thoses graphs*
+*Note: Run main_signal.py to plot thoses graphs*
 
 
 <br/>
@@ -249,7 +249,7 @@ Two types of thresholding exists:
   <b>Fig.7</b> - Daubechie_4 Denoising
 </p>
 
-*Note: Use main_denoising.py to plot thoses graphs*
+*Note: Run main_denoising.py to plot thoses graphs*
 
 
 <br/>
@@ -320,4 +320,4 @@ alt="\begin{align*}
 </p>
 
 
-*Note: Use main_densities.py to plot thoses graphs*
+*Note: Run main_density.py to plot thoses graphs*
