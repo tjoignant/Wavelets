@@ -11,7 +11,7 @@ Small wave with a defined start and end. A signal can be reconstructed as the su
 <p align="center">
   <img src="./Images/Wavelets_Examples.png" alt="Test"/>
   <br/>
-  <em> <b>Fig.1</b> Wavelets Examples </em>
+  <b>Fig.1</b> Wavelets Examples
 </p>
 
 <br/>
