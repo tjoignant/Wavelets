@@ -169,9 +169,9 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
 ##### Daubechie_4 Wavelet
 
 <p align="center">
-  <img src="./Images/Decomposition_Recomposition.png" />
+  <img src="./Images/Daubechie_Decomposition_Recomposition.png" />
   <br/>
-  <b>Fig.2</b> - Signal Decomposition/Recomposition
+  <b>Fig.4</b> - Daubechie_4 Decomposition/Recomposition
 </p>
 
 <br/>
