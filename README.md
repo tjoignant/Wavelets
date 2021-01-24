@@ -180,7 +180,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
 To denoise a signal one simply needs to denoise the details coefficients:
 
 <p align="center">
-  <img src="./Images/Signal_Denoising.png" />
+  <img src="./Images/Denoising_Examples.png" />
   <br/>
   <b>Fig.4</b> - Signal Denoising
 </p>
