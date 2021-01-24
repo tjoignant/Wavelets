@@ -9,7 +9,7 @@ Small wave with a defined start and end. A signal can be reconstructed as the su
 <br/>
 
 <p align="center">
-  <img src="./Images/Wavelets_Examples.png" alt="Test"/>
+  <img src="./Images/Wavelets_Examples.png" />
   <br/>
   <b>Fig.1</b> Wavelets Examples
 </p>
@@ -95,6 +95,14 @@ Yet to be implemented ...
 ## Decomposition/Recomposition
 
 Using a discrete Wavelet (Daubechie for example) one can easily decompose and recompose perfectly the signal by doing the following steps:
+
+<br/>
+
+<p align="center">
+  <img src="./Images/Decomposition_Recomposition.png" />
+  <br/>
+  <b>Fig.2</b> Signal Decomposition/Recomposition
+</p>
 
 ### Discrete Wavelet Transform (dwt)
 
