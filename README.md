@@ -183,7 +183,7 @@ To denoise a signal one simply needs to denoise the details coefficients:
 <p align="center">
   <img src="./Images/Denoised_Signal.png" />
   <br/>
-  <b>Fig.4</b> - Signal Denoising
+  <b>Fig.5</b> - Signal Denoising
 </p>
 
 
@@ -192,13 +192,21 @@ To denoise a signal one simply needs to denoise the details coefficients:
 
 #### Soft/Hard Thresholding
 
+To denoise a signal one simply needs to denoise the details coefficients:
+
+<p align="center">
+  <img src="./Images/Threshold_Types.png" />
+  <br/>
+  <b>Fig.6</b> - Threshold_Types
+</p>
+
 
 #### Examples
 
 <p align="center">
   <img src="./Images/Denoising_Examples.png" />
   <br/>
-  <b>Fig.4</b> - Daubechie_4 Denoising
+  <b>Fig.7</b> - Daubechie_4 Denoising
 </p>
 
 *Tip: Use main_denoising.py to plot this graph*
