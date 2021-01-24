@@ -241,7 +241,7 @@ Two types of thresholding exists:
 
 <br/>
 
-#### Examples
+#### Example
 
 <p align="center">
   <img src="./Images/Denoising_Examples.png" />
@@ -307,6 +307,7 @@ alt="\begin{align*}
 \end{align*}
 ">
 
+<br/>
 
 #### Example
 
