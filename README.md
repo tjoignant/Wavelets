@@ -104,13 +104,49 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   <b>Fig.2</b> Signal Decomposition/Recomposition
 </p>
 
-### Discrete Wavelet Transform (dwt)
+#### Discrete Wavelet Transform (dwt)
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0AcD_%7Bj%2Ck%7D+%3D+%5Csum_%7Bt%3D1%7D%5ET+z%28u_t%29+%5Cpsi_%7Bj%2Ck%7D%28u_t%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  cD_{j,k} = \sum_{t=1}^T z(u_t) \psi_{j,k}(u_t)
+  \end{align*}
+  ">
+</p>
 
-### Inverse Discrete Wavelet Transform (idwt)
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0AcA_%7Bj%2Ck%7D+%3D+%5Csum_%7Bt%3D1%7D%5ET+z%28u_t%29+%5Cphi_%7Bj%2Ck%7D%28u_t%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  cA_{j,k} = \sum_{t=1}^T z(u_t) \phi_{j,k}(u_t)
+  \end{align*}
+  ">
+</p>
 
-### Signal Recomposition
 
-### Example
+#### Inverse Discrete Wavelet Transform (idwt)
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0AyD_j%28u_t%29+%3D+%5Csum_%7Bk%7DcD_%7Bj%2Ck%7D+%5Cpsi_%7Bj%2Ck%7D%28u_t%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  yD_j(u_t) = \sum_{k}cD_{j,k} \psi_{j,k}(u_t)
+  \end{align*}
+  ">
+</p>
+
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0AyA_j%28u_t%29+%3D+%5Csum_%7Bk%7DcA_%7Bj%2Ck%7D+%5Cphi_%7Bj%2Ck%7D%28u_t%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  yA_j(u_t) = \sum_{k}cA_{j,k} \phi_{j,k}(u_t)
+  \end{align*}
+  ">
+</p>
+
+
+#### Signal Recomposition
+
+#### Example
 
 <br/>
 
