@@ -11,7 +11,7 @@ Small wave with a defined start and end. A signal can be reconstructed as the su
 <p align="center">
   <img src="./Images/Wavelets_Examples.png" />
   <br/>
-  <b>Fig.1</b> Wavelets Examples
+  <b>Fig.1</b> - Wavelets Examples
 </p>
 
 <br/>
@@ -101,7 +101,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
 <p align="center">
   <img src="./Images/Decomposition_Recomposition.png" />
   <br/>
-  <b>Fig.2</b> Signal Decomposition/Recomposition
+  <b>Fig.2</b> - Signal Decomposition/Recomposition
 </p>
 
 #### Discrete Wavelet Transform (dwt)
@@ -145,8 +145,34 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
 
 
 #### Signal Recomposition
+<p align="center">
+  <img src=
+  "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0A%5Chat+z+%28u_t%29+%3D+%5Csum_j+yD_j+%28u_t%29+%2B+yA_%7Bj0%7D+%28u_t%29%0A%5Cend%7Balign%2A%7D%0A" 
+  alt="\begin{align*}
+  \hat z (u_t) = \sum_j yD_j (u_t) + yA_{j0} (u_t)
+  \end{align*}
+  ">
+</p>
+
 
 #### Example
+
+##### Haar Wavelet
+
+<p align="center">
+  <img src="./Images/Haar_Decomposition_Recomposition.png" />
+  <br/>
+  <b>Fig.3</b> - Haar Decomposition/Recomposition
+</p>
+
+
+##### Daubechie_4 Wavelet
+
+<p align="center">
+  <img src="./Images/Decomposition_Recomposition.png" />
+  <br/>
+  <b>Fig.2</b> - Signal Decomposition/Recomposition
+</p>
 
 <br/>
 
