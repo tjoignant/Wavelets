@@ -163,6 +163,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   <b>Fig.3</b> - Haar Decomposition/Recomposition
 </p>
 
+<br/>
 
 <p align="center">
   <img src="./Images/Daubechie_Decomposition_Recomposition.png" />
@@ -180,10 +181,26 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
 To denoise a signal one simply needs to denoise the details coefficients:
 
 <p align="center">
-  <img src="./Images/Denoising_Examples.png" />
+  <img src="./Images/Denoised_Signal.png" />
   <br/>
   <b>Fig.4</b> - Signal Denoising
 </p>
 
+
+#### Threshold
+
+
+#### Soft/Hard Thresholding
+
+
+#### Examples
+
+<p align="center">
+  <img src="./Images/Denoising_Examples.png" />
+  <br/>
+  <b>Fig.4</b> - Daubechie_4 Denoising
+</p>
+
+*Tip: Use main_denoising.py to plot this graph*
 
 
