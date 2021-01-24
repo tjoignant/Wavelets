@@ -1,6 +1,6 @@
 # Wavelets
 
-## Introduction
+## 1 - Introduction
 
 #### What is a wavelet ?
 
@@ -26,7 +26,7 @@ Break down a signal into 2 components of various scales and frequencies. Financi
 
 <br/>
 
-## Building the Wavelets
+## 2 - Building the Wavelets
 
 ### Daubechie
 
@@ -92,7 +92,7 @@ Yet to be implemented ...
 
 <br/>
 
-## Decomposition/Recomposition
+## 3 - Decomposition/Recomposition
 
 Using a discrete Wavelet (Daubechie for example) one can easily decompose and recompose perfectly the signal by doing the following steps:
 
@@ -155,7 +155,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
 </p>
 
 
-##### Haar Wavelet
+#### Examples
 
 <p align="center">
   <img src="./Images/Haar_Decomposition_Recomposition.png" />
@@ -164,14 +164,26 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
 </p>
 
 
-##### Daubechie_4 Wavelet
-
 <p align="center">
   <img src="./Images/Daubechie_Decomposition_Recomposition.png" />
   <br/>
   <b>Fig.4</b> - Daubechie_4 Decomposition/Recomposition
 </p>
 
+*Tip: Use main_signal.py to plot thoses graphs*
+
+
 <br/>
 
-## Signal Denoising
+## 4 - Signal Denoising
+
+To denoise a signal one simply needs to denoise the details coefficients:
+
+<p align="center">
+  <img src="./Images/Signal_Denoising.png" />
+  <br/>
+  <b>Fig.4</b> - Signal Denoising
+</p>
+
+
+
