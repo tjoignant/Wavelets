@@ -155,8 +155,6 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
 </p>
 
 
-#### Examples
-
 ##### Haar Wavelet
 
 <p align="center">
