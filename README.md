@@ -252,6 +252,8 @@ Two types of thresholding exists:
 *Note: Use main_denoising.py to plot thoses graphs*
 
 
+<br/>
+
 ## 5 - Density Estimation
 
 One can take as an input signal a stock's returns and estimate it's Probability Distribution Function using the wavelet analysis. Once again, it exists multiples wavelet density estimators, we will see the two of them:
