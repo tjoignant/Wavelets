@@ -104,6 +104,8 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   <b>Fig.2</b> - Signal Decomposition/Recomposition
 </p>
 
+<br/>
+
 #### Discrete Wavelet Transform (dwt)
 <p align="center">
   <img src=
@@ -123,6 +125,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   ">
 </p>
 
+<br/>
 
 #### Inverse Discrete Wavelet Transform (idwt)
 <p align="center">
@@ -143,6 +146,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   ">
 </p>
 
+<br/>
 
 #### Signal Recomposition
 <p align="center">
@@ -154,6 +158,7 @@ Using a discrete Wavelet (Daubechie for example) one can easily decompose and re
   ">
 </p>
 
+<br/>
 
 #### Examples
 
@@ -186,6 +191,7 @@ To denoise a signal one simply needs to denoise the details coefficients:
   <b>Fig.5</b> - Signal Denoising
 </p>
 
+<br/>
 
 #### Thresholds
 
@@ -211,8 +217,10 @@ Their are multiples ways of computing the threshold to use. The most two famous 
   alt="\begin{align*}
   \lambda_{SURE} = argmin_{0<\lambda<\lambda_{universal}}SURE(\lambda,x)
   \end{align*}
-">
-  
+  ">
+</p>
+
+<p align="center">
   <img src=
   "https://render.githubusercontent.com/render/math?math=%5Cdisplaystyle+%5Cbegin%7Balign%2A%7D%0ASURE%28%5Clambda%2Cx%29+%3D+s+%2B+%5Csum_%7Bi%3D1%7D%5Es+%5Bmin%28%5Cmid+X_i%5Cmid%2C+%5Clambda%29%5D%5E2-2card%28i%3A%5Cmid+X_i%5Cmid+%3C%5Clambda%29%0A%5Cend%7Balign%2A%7D%0A" 
   alt="\begin{align*}
@@ -221,6 +229,7 @@ Their are multiples ways of computing the threshold to use. The most two famous 
   ">
 </p>
 
+<br/>
 
 #### Soft/Hard Thresholding
 
@@ -234,6 +243,7 @@ Two types of thresholding exists:
   <b>Fig.6</b> - Threshold_Types
 </p>
 
+<br/>
 
 #### Examples
 
