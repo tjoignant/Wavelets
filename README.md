@@ -2,7 +2,7 @@
 
 ## Introduction
 
-*What is a wavelet ?*
+#### What is a wavelet ?
 
 Small wave with a defined start and end. A signal can be reconstructed as the sum of small dilated and translated wavelets.
 
@@ -16,7 +16,7 @@ Small wave with a defined start and end. A signal can be reconstructed as the su
 
 <br/>
 
-*Why do we use wavelets ?* <br/>
+#### Why do we use wavelets ? <br/>
 
 Break down a signal into 2 components of various scales and frequencies. Financial applications:
 * Denoising
@@ -42,7 +42,7 @@ The daubechie wavelet's are orthognal with a compact support. Their are the more
   ">
 </p>
 
-Tip: To construct the father wavelet we use a cascade algorithm
+*Tip: To construct the father wavelet we use a cascade algorithm*
 
 #### Mother Wavelet
 <p align="center">
@@ -73,7 +73,7 @@ Tip: To construct the father wavelet we use a cascade algorithm
   ">
 </p>
 
-Tip: To reduce computing time one can take 
+*Tip: To reduce computing time one can take*
 
 <br/>
 
