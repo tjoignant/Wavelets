@@ -13,7 +13,7 @@ alpha_array = [0.01, 0.05, 0.10]
 smoothing_array = [0.002, 0.005, 0.008]
 
 # Retrieve Historical Data
-ohlc = functions.get_data("AAPL", "1d")
+ohlc = functions.get_data(ticker="AAPL", interval="1d", start_date="2019-01-01", end_date="2021-01-01")
 signal = ohlc['Close']
 
 # Compute Real & Estimated Returns
@@ -24,7 +24,6 @@ simulated_returns = np.random.normal(0, 1, 1750) / 100
 density_normal_x = np.linspace(min(simulated_returns)*100, max(simulated_returns)*100, len(simulated_returns))
 density_normal_y = np.empty(len(density_normal_x))
 for i in range(0, len(density_normal_x)):
-    density_normal_y[i] = math.exp(-(density_normal_x[i] ** 2) / 2) / math.sqrt(2 * math.pi)
     density_normal_y[i] = functions.normal_pdf(density_normal_x[i], 0, 1)
 density_normal_y = density_normal_y / sum(density_normal_y)
 density_normal_x = density_normal_x/100

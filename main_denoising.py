@@ -6,7 +6,7 @@ import Wavelets
 
 
 # Retrieve Historical Data
-ohlc = functions.get_data("AAPL", "1d")
+ohlc = functions.get_data(ticker="AAPL", interval="1d", start_date="2019-01-01", end_date="2021-01-01")
 signal = ohlc['Close']
 
 # Choosing Analysis Parameters

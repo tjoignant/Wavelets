@@ -370,7 +370,7 @@ class Daubechie:
             if t[i] == 1:
                 phi_t[i] = 1
         # Cascade algorithm
-        for j in range(2, nb_iterations + 1):
+        for _ in range(2, nb_iterations + 1):
             step = step / 2
             t_tampon = t
             phi_t_tampon = phi_t
