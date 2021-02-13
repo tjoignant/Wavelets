@@ -58,9 +58,9 @@ ax3.plot_surface(density_wav_x, density_wav_y, density_wav_z, rstride=1, cstride
 density_wav_x, density_wav_y = functions.update_axis_arrays(density_wav_x, density_wav_y, type="normal")
 
 # Simulated Data - VaR
-print("\nSIMULATED RETURNS:")
 smoothing = 0.002
 last_return = 0
+print("\nSIMULATED RETURNS (lagged return: {}%)".format(last_return))
 for alpha in alpha_array:
     print("    - Normal density VaR {}%: {}%".format(int((1-alpha)*100), functions.compute_VaR_2D(density_normal_x, density_normal_y, density_normal_z, last_return, alpha)))
     print("    - Kernel density (h: {}) VaR {}%: {}%".format(smoothing, int((1 - alpha)*100), functions.compute_VaR_2D(density_kernel_x, density_kernel_y, density_kernel_z, last_return, alpha)))
@@ -88,12 +88,12 @@ ax6.plot_surface(density_wav_x, density_wav_y, density_wav_z, rstride=1, cstride
 density_wav_x, density_wav_y = functions.update_axis_arrays(density_wav_x, density_wav_y, type="normal")
 
 # Real Data - VaR
-print("\nREAL RETURNS:")
 smoothing = 0.008
 last_return = 0
+print("\nREAL RETURNS (lagged return: {}%)".format(last_return))
 for alpha in alpha_array:
     print("    - Kernel density (h: {}) VaR {}%: {}%".format(smoothing, int((1 - alpha)*100), functions.compute_VaR_2D(density_kernel_x, density_kernel_y, density_kernel_z, last_return, alpha)))
-    print("    - Wavelet Linear density VaR {}%: {}%".format(int((1 - alpha)*100), functions.compute_VaR_2D(density_wav_x, density_wav_y, density_wav_z, last_return, alpha)))
+    print("    - Wavelet Linear density VaR {}%: {}%\n".format(int((1 - alpha)*100), functions.compute_VaR_2D(density_wav_x, density_wav_y, density_wav_z, last_return, alpha)))
 
 # Show Graph
 plt.show()
