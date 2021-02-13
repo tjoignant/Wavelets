@@ -13,7 +13,6 @@ train_returns = functions.compute_returns(train_signal)
 [train_returns, train_returns_lagged] = functions.lag_returns(train_returns)
 
 # Compute Bivariate Density Estimation
-print("\n[INFO] {} - Computing the train returns bivariate density using the gaussian kernel estimator".format(functions.get_now()))
 density_kernel_x, density_kernel_y, density_kernel_z = functions.kde2D(train_returns, train_returns_lagged, 0.01)
 density_kernel_x, density_kernel_y = functions.update_axis_arrays(density_kernel_x, density_kernel_y)
 

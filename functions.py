@@ -247,14 +247,14 @@ def kde2D(x, y, bandwidth, xbins=100j, ybins=100j, **kwargs):
     return xx, yy, z
 
 def update_axis_arrays(xx, yy, type="kernel"):
-    if type == "kernel":
-        y = yy[0]
-        x = np.empty(len(xx))
-        for i in range(0, len(xx)):
-            x[i] = xx[i][0]
-    else:
+    if type == "normal":
         x = xx[0]
         y = np.empty(len(yy))
         for i in range(0, len(yy)):
             y[i] = yy[i][0]
+    else:
+        y = yy[0]
+        x = np.empty(len(xx))
+        for i in range(0, len(xx)):
+            x[i] = xx[i][0]
     return x, y

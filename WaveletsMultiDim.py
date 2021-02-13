@@ -12,43 +12,203 @@ class Daubechie:
         :param signals:                     signal to analyse [2D array]
         :param nb_vanishing_moments:        amount of vanishing moments to use for the wavelet, 1 --> Haar & 2,3,...,10 --> Daubechie [int]
         """
-        self.signal = signals
+        self.signal = signals[0]
+        self.signal_lagged = signals[1]
         self.len_signal = len(self.signal)
         self.nb_moments = nb_vanishing_moments
         self.scaling_function_matrix = self._build_father_wavelet()
         self.white_noise_std = 1
 
     # METHODS (public)
-    def density(self, j, estimator="donoho"):
+    def density(self, j, estimator="linear"):
         """
         Compute the signal's density
         :param j:               scaling parameter [int]
         :param estimator:       estimator type [str]
         :return:                density function estimation values [1D array]
         """
-        for i in range(0, self.len_signal):
-            [c, d] = self._scaling_coefficients(i, j)
-            lowest_value = round(min(self.signal[i]), 3)
-            highest_value = round(max(self.signal[i]), 3)
-            density_x = np.linspace(lowest_value, highest_value, len(self.signal))
-            density_y = np.empty(len(self.signal[i]))
-            print("[INFO] {} - Computing the signal's density using the wavelet {} estimator (resolution level: {})".format(functions.get_now(), estimator, j))
-            if estimator == "donoho" or estimator == "thresholded":
-                density_y = self._density_donoho(j, c, d, density_x)
-            else:
-                print('\n[ERROR] {} - Undefined estimator)'.format(functions.get_now()))
-                quit()
-            return [density_x, density_y]
+        [c, d] = self._scaling_coefficients(j)
+        lowest_value = round(min(self.signal), 3)
+        highest_value = round(max(self.signal), 3)
+        density_x = np.linspace(lowest_value, highest_value, self.len_signal)
+        density_y = np.linspace(lowest_value, highest_value, self.len_signal)
+        density_z = np.empty(shape=(len(density_x), len(density_y)))
+        print("[INFO] {} - Computing the signal's density using the wavelet {} estimator (resolution level: {})".format(
+            functions.get_now(), estimator, j))
+        if estimator == "donoho" or estimator == "thresholded":
+            density_z = self._density_donoho(j, c, d, density_x, density_y)
+        elif estimator == "linear":
+            density_z = self._density_linear(j, c, density_x, density_y)
+        else:
+            print('\n[ERROR] {} - Undefined estimator)'.format(functions.get_now()))
+            quit()
+        density_x, density_y = np.meshgrid(density_x, density_y)
+        return [density_x, density_y, density_z]
 
-    def _scaling_coefficients(self, i, j):
+    def _density_linear(self, j, c_coef, x_array, y_array):
+        """
+        Compute the signal's density (Linear estimator)
+        :param j:           scaling parameter [int]
+        :param c_coef:      scaling coefficients C [1D array]
+        :param x_array:     density index [1D array]
+        :return:            density values [1D array]
+        """
+        k_lim_ = int(pow(2, -j) * self.len_signal)
+        z_array = np.empty(shape=(len(x_array), len(y_array)))
+        cpt = 0
+        perc = 0
+        for i in range(0, len(x_array)):
+            for ii in range(0, len(y_array)):
+                sum_ = 0
+                for k in range(-k_lim_, k_lim_):
+                    for k2 in range(-k_lim_, k_lim_):
+                        sum_ = sum_ + c_coef[k + k_lim_, k2 + k_lim_] * self._derived_father_wavelet(x_array[i], j, k) * self._derived_father_wavelet(y_array[ii], j, k2)
+                z_array[i, ii] = sum_
+                if 100 * cpt / (len(x_array) * len(y_array)) > perc + 1:
+                    perc = int(100 * cpt / (len(x_array) * len(y_array)))
+                    print("{}%".format(perc))
+                cpt = cpt + 1
+        z_array[z_array < 0] = 0
+        # z_array = z_array / sum(z_array)
+        return z_array
+
+    def _density_donoho(self, j, c_coef, d_coef, x_array, y_array):
+        """
+        Compute the signal's density (Linear estimator)
+        :param j:           scaling parameter [int]
+        :param c_coef:      scaling coefficients C [1D array]
+        :param x_array:     density index [1D array]
+        :return:            density values [1D array]
+        """
+        k_lim_ = int(pow(2, -j) * self.len_signal)
+        z_array = np.empty(shape=(len(x_array), len(y_array)))
+        cpt = 0
+        perc = 0
+        for i in range(0, len(x_array)):
+            for ii in range(0, len(y_array)):
+                sum_ = 0
+                for k in range(-k_lim_, k_lim_):
+                    for k2 in range(-k_lim_, k_lim_):
+                        sum_ = sum_ + c_coef[k + k_lim_, k2 + k_lim_] * self._derived_father_wavelet(x_array[i], j, k) * self._derived_father_wavelet(y_array[ii], j, k2)
+                for j_ in range(j, j+1):
+                    for k_ in range(-k_lim_, k_lim_):
+                        for q in range(0, 3):
+                            sum_ = sum_ + d_coef[q, k_ + k_lim_] * self._derived_mother_wavelet_multidim(x_array[i], y_array[ii], j, k_, q)
+                if 100 * cpt / (len(x_array) * len(y_array)) > perc + 1:
+                    perc = int(100 * cpt / (len(x_array) * len(y_array)))
+                    print("{}%".format(perc))
+                cpt = cpt + 1
+                z_array[i, ii] = sum_
+        z_array[z_array < 0] = 0
+        # z_array = z_array / sum(z_array)
+        return z_array
+
+    def _scaling_coefficients(self, j):
         """
         Compute the wavelet's scaling coefficients C & D
         :param j:       scaling parameter [int]
         :return:        scaling coefficients [2D array]
         """
-        c = self._scaling_coef_c(i, j)
-        d = self._scaling_coef_d(i, j)
+        c = self._scaling_coef_c(j)
+        d = self._scaling_coef_d(j)
         return [c, d]
+
+    def _scaling_coef_c(self, j):
+        """
+        Compute the wavelet's scaling coefficients C
+        :param j:       scaling parameter [int]
+        :return:        scaling coefficients D [1D array]
+        """
+        k_lim_ = int(pow(2, -j) * self.len_signal)
+        c = np.empty(shape=(2 * k_lim_, 2 * k_lim_))
+        for k in range(-k_lim_, k_lim_):
+            for k2 in range(-k_lim_, k_lim_):
+                sum_ = 0
+                for i in range(0, self.len_signal):
+                    sum_ = sum_ + self._derived_father_wavelet(self.signal[i], j, k) * self._derived_father_wavelet(self.signal_lagged[i], j, k2)
+                c[k + k_lim_, k2 + k_lim_] = sum_ / self.len_signal
+        return c
+
+    def _scaling_coef_d(self, j):
+        """
+        Compute the wavelet's scaling coefficients C
+        :param j:       scaling parameter [int]
+        :return:        scaling coefficients D [1D array]
+        """
+        k_lim_ = int(pow(2, -j) * self.len_signal)
+        d = np.empty(shape=(3, 2 * k_lim_))
+        for q in range(0, 3):
+            for k in range(-k_lim_, k_lim_):
+                sum_ = 0
+                for i in range(0, self.len_signal):
+                    sum_ = sum_ + self._derived_mother_wavelet_multidim(self.signal[i], self.signal_lagged[i], j, k, q)
+                d[q, k + k_lim_] = sum_ / self.len_signal
+        return d
+
+    def _derived_mother_wavelet_multidim(self, t1, t2, j, k, q):
+        if q == 0:
+            return self._derived_father_wavelet(t1, j, k) * self._derived_mother_wavelet(t2, j, k)
+        elif q == 1:
+            return self._derived_mother_wavelet(t1, j, k) * self._derived_father_wavelet(t2, j, k)
+        else:
+            return self._derived_father_wavelet(t1, j, k) * self._derived_father_wavelet(t2, j, k)
+
+    def _derived_mother_wavelet(self, t, j, k):
+        """
+        Retrieve derived mother wavelet
+        :param t:       time index [float]
+        :param j:       scaling parameter [int]
+        :param k:       translation parameter [int]
+        :return:        derived mother wavelet value [float]
+        """
+        x = pow(2, j) * t - k
+        mu = pow(2, j / 2) * self._mother_wavelet(x)
+        return mu
+
+    def _derived_father_wavelet(self, t, j, k):
+        """
+        Retrieve derived father wavelet
+        :param t:       time index [float]
+        :param j:       scaling parameter [int]
+        :param k:       translation parameter [int]
+        :return:        derived father wavelet value [float]
+        """
+        x = pow(2, j) * t - k
+        mu = pow(2, j / 2) * self._father_wavelet(x)
+        return mu
+
+    def _mother_wavelet(self, t):
+        """
+        Retrieve mother wavelet
+        :param t:       time index [float]
+        :return:        mother wavelet value [float]
+        """
+        sum_ = 0
+        for k in range(0, 2 * self.nb_moments):
+            sum_ += pow(-1, k) * coefficients_dict[self.nb_moments][2 * self.nb_moments - 1 - k] * \
+                    self._father_wavelet(2 * t - k)
+        return sum_
+
+    def _father_wavelet(self, x):
+        """
+        Retrieve father wavelet
+        :param x:       time index [float]
+        :return:        father wavelet value [float]
+        """
+        # Initialization
+        [t, phi_t] = self.scaling_function_matrix
+        phi_ = 0
+        # Only if x belongs to the wavelet's support
+        if t[0] <= x <= t[len(t) - 1]:
+            # Retrieve corresponding phi value
+            for i in range(0, len(t) - 1):
+                if x == t[i]:
+                    phi_ = phi_t[i]
+                    break
+                elif x < t[i]:
+                    phi_ = self._interpolate(x, t[i], t[i + 1], phi_t[i], phi_t[i + 1])
+                    break
+        return phi_
 
     def _build_father_wavelet(self):
         """

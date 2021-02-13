@@ -247,13 +247,11 @@ class Daubechie:
         """
         k_lim_ = int(pow(2, -j) * self.len_signal)
         f_array = np.empty(len(x_array))
-        cpt = 0
-        for x in x_array:
+        for i in range(0, len(x_array)):
             sum_ = 0
             for k in range(-k_lim_, k_lim_):
-                sum_ = sum_ + self._derived_father_wavelet(x, j, k) * c_coef[k+k_lim_]
-            f_array[cpt] = sum_
-            cpt = cpt + 1
+                sum_ = sum_ + self._derived_father_wavelet(x_array[i], j, k) * c_coef[k+k_lim_]
+            f_array[i] = sum_
         f_array[f_array < 0] = 0
         f_array = f_array / sum(f_array)
         return f_array
