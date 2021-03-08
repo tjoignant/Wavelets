@@ -4,6 +4,8 @@ import WaveletsMultiDim
 import numpy as np
 import matplotlib.pyplot as plt
 
+from scipy.integrate import quad
+
 
 # Retrieve Historical Data
 ticker_id = "AAPL"
@@ -34,6 +36,7 @@ for i in range(0, len(test_returns)-1):
         portfolio_value[i + 1] = portfolio_value[i] * (1 - test_returns[i + 1])
     if (predicted_return > 0 and test_returns[i+1] > 0) or (predicted_return <= 0 and test_returns[i+1] <= 0):
         cpt = cpt + 1
+pKernel = cpt
 print("\n[INFO] {} - Gaussian Kernel Backtesting Results: {}%".format(functions.get_now(), round(100*cpt/(len(test_returns)-1), 2)))
 plt.plot(test_dates[:-1], portfolio_value, label="Kernel Gaussian")
 
@@ -63,6 +66,8 @@ for i in range(0, len(test_returns)-1):
     except TypeError:
         error_cpt = error_cpt + 1
         portfolio_value[i + 1] = portfolio_value[i]
+
+pBivariate = cpt
 print("\n[INFO] {} - Wavelet Backtesting Results: {}%".format(functions.get_now(), round(100*cpt/(len(test_returns)-1), 2)))
 print("NB ERROR : {}".format(error_cpt))
 plt.plot(test_dates[:-1], portfolio_value, label="Wavelet")
@@ -75,3 +80,25 @@ plt.ylabel("Returns")
 plt.legend()
 plt.grid()
 plt.show()
+
+# p-value
+
+n = len(portfolio_value)
+p0 = 0.5
+pKernel /= n
+pBivariate /= n
+
+z0Kernel = (pKernel - p0) / np.sqrt( p0*(1-p0) / n )
+z0Bivariate = (pBivariate - p0) / np.sqrt( p0*(1-p0) / n )
+
+def normalfunction(x):
+    return np.exp(-x**2/2)/np.sqrt(2*np.pi)
+
+integrateKernel,err1 = quad(normalfunction, -1000, z0Kernel)
+integrateBivariate,err2 = quad(normalfunction, -1000, z0Bivariate)
+
+p_valueKernel = 1 - integrateKernel
+p_valueBivariate = 1 - integrateBivariate
+
+print("\nP-value for Kernel : " + str(p_valueKernel) )
+print("\nP-value for Bivariate : " + str(p_valueBivariate) )
