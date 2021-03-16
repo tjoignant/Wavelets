@@ -8,10 +8,10 @@ from scipy.integrate import quad
 
 
 # Retrieve Historical Data
-ticker_id = "AAPL"
-ohlc = functions.get_data(ticker=ticker_id, interval="1d", start_date="2019-01-01", end_date="2020-01-01")
+ticker_id = "^GSPC"
+ohlc = functions.get_data(ticker=ticker_id, interval="1d", start_date="2011-09-02", end_date="2013-09-02")
 train_signal = np.flip(ohlc['Close'].values)
-ohlc = functions.get_data(ticker=ticker_id, interval="1d", start_date="2020-01-01", end_date="2021-01-01")
+ohlc = functions.get_data(ticker=ticker_id, interval="1d", start_date="2013-09-03", end_date="2015-04-17")
 test_signal = np.flip(ohlc['Close'].values)
 test_dates = np.flip(ohlc['Date'].values)
 
@@ -37,8 +37,44 @@ for i in range(0, len(test_returns)-1):
     if (predicted_return > 0 and test_returns[i+1] > 0) or (predicted_return <= 0 and test_returns[i+1] <= 0):
         cpt = cpt + 1
 pKernel = cpt
-print("\n[INFO] {} - Gaussian Kernel Backtesting Results: {}%".format(functions.get_now(), round(100*cpt/(len(test_returns)-1), 2)))
-plt.plot(test_dates[:-1], portfolio_value, label="Kernel Gaussian")
+plt.plot(test_dates[:-1], test_signal[:-1]/test_signal[0], label="Ticker")
+plt.plot(test_dates[:-1], portfolio_value, label="Kernel Portfolio")
+
+returns = functions.compute_returns(portfolio_value)
+risk_free_rate = 0.02
+annualized_returns = np.mean(returns) * 252 * 100
+volatility = returns.std()
+annualized_vol = volatility * np.sqrt(252) * 100
+sharpe = (annualized_returns - risk_free_rate) / annualized_vol
+VaR_95 = functions.compute_empirical_VaR(returns, 0.95) * 100
+VaR_99 = functions.compute_empirical_VaR(returns, 0.99) * 100
+lower_vol = functions.compute_semi_deviation(returns)
+annualized_lower_vol = lower_vol * np.sqrt(252) * 100
+sortino = (annualized_returns - risk_free_rate) / annualized_lower_vol
+[i, j] = functions.compute_MDD(portfolio_value)
+MDD = (portfolio_value[i] - portfolio_value[j]) * 100
+skewness = functions.compute_skewness(returns)
+kurtosis = functions.compute_kurtosis(returns)
+n = len(portfolio_value)
+p0 = 0.5
+pKernel /= n
+z0Kernel = (pKernel - p0) / np.sqrt(p0*(1-p0) / n)
+integrateKernel, err1 = quad(functions.normalfunction, -1000, z0Kernel)
+p_valueKernel = 1 - integrateKernel
+print("\nKERNEL GAUSSIAN")
+print("Backtesting Results: {}%".format(round(100*cpt/(len(test_returns)-1), 2)))
+print("P-value: {}".format(round(p_valueKernel, 2)))
+print("Returns : {}%".format(round(annualized_returns, 2)))
+print("Vol : {}%".format(round(annualized_vol, 2)))
+print("Lower Vol : {}%".format(round(annualized_lower_vol, 2)))
+print("Sharpe : {}".format(round(sharpe, 2)))
+print("Sortino : {}".format(round(sortino, 2)))
+print("VaR 95% : {}%".format(round(VaR_95, 2)))
+print("VaR 99% : {}%".format(round(VaR_99, 2)))
+print("MDD : {}%".format(round(MDD, 2)))
+print("Skewness : {}".format(round(skewness, 3)))
+print("Kurtosis: {}".format(round(kurtosis, 3)))
+plt.plot([test_dates[i], test_dates[j]], [portfolio_value[i], portfolio_value[j]], 'o', color='Red', markersize=5, label="Kernel MDD")
 
 
 # Wavelet Parameters
@@ -49,6 +85,7 @@ wavelet = WaveletsMultiDim.Daubechie(signals=[train_returns, train_returns_lagge
 # Compute Bivariate Wavelet Density Estimation
 [density_wav_x, density_wav_y, density_wav_z] = wavelet.density(j, "linear")
 density_wav_x, density_wav_y = functions.update_axis_arrays(density_wav_x, density_wav_y, type="normal")
+
 
 # Backtesting (Wavelet)
 cpt = 0
@@ -68,37 +105,51 @@ for i in range(0, len(test_returns)-1):
         portfolio_value[i + 1] = portfolio_value[i]
 
 pBivariate = cpt
-print("\n[INFO] {} - Wavelet Backtesting Results: {}%".format(functions.get_now(), round(100*cpt/(len(test_returns)-1), 2)))
 print("NB ERROR : {}".format(error_cpt))
-plt.plot(test_dates[:-1], portfolio_value, label="Wavelet")
+plt.plot(test_dates[:-1], portfolio_value, label="Wavelet Portfolio")
+
+# p-value
+n = len(portfolio_value)
+p0 = 0.5
+pBivariate /= n
+z0Bivariate = (pBivariate - p0) / np.sqrt(p0*(1-p0) / n)
+integrateBivariate, err2 = quad(functions.normalfunction, -1000, z0Bivariate)
+p_valueBivariate = 1 - integrateBivariate
+print("\nWAVELET")
+print("Backtesting Results: {}%".format(round(100*cpt/(len(test_returns)-1), 2)))
+print("P-value: {}".format(round(p_valueBivariate, 2)))
+returns = functions.compute_returns(portfolio_value)
+risk_free_rate = 0.02
+annualized_returns = np.mean(returns) * 252 * 100
+volatility = returns.std()
+annualized_vol = volatility * np.sqrt(252) * 100
+sharpe = (annualized_returns - risk_free_rate) / annualized_vol
+VaR_95 = functions.compute_empirical_VaR(returns, 0.95) * 100
+VaR_99 = functions.compute_empirical_VaR(returns, 0.99) * 100
+lower_vol = functions.compute_semi_deviation(returns)
+annualized_lower_vol = lower_vol * np.sqrt(252) * 100
+sortino = (annualized_returns - risk_free_rate) / annualized_lower_vol
+[i, j] = functions.compute_MDD(portfolio_value)
+MDD = (portfolio_value[i] - portfolio_value[j]) * 100
+skewness = functions.compute_skewness(returns)
+kurtosis = functions.compute_kurtosis(returns)
+print("Returns : {}%".format(round(annualized_returns, 2)))
+print("Vol : {}%".format(round(annualized_vol, 2)))
+print("Lower Vol : {}%".format(round(annualized_lower_vol, 2)))
+print("Sharpe : {}".format(round(sharpe, 2)))
+print("Sortino : {}".format(round(sortino, 2)))
+print("VaR 95% : {}%".format(round(VaR_95, 2)))
+print("VaR 99% : {}%".format(round(VaR_99, 2)))
+print("MDD : {}%".format(round(MDD, 2)))
+print("Skewness : {}".format(round(skewness, 3)))
+print("Kurtosis: {}".format(round(kurtosis, 3)))
+plt.plot([test_dates[i], test_dates[j]], [portfolio_value[i], portfolio_value[j]], 'o', color='Green', markersize=5, label="Wavelet MDD")
 
 # Show Results
 plt.title("Portfolio Returns Evolution - " + ticker_id)
-plt.plot(test_dates[:-1], test_signal[:-1]/test_signal[0], label="Stock")
 plt.xlabel("Date")
 plt.ylabel("Returns")
 plt.legend()
 plt.grid()
+
 plt.show()
-
-# p-value
-
-n = len(portfolio_value)
-p0 = 0.5
-pKernel /= n
-pBivariate /= n
-
-z0Kernel = (pKernel - p0) / np.sqrt( p0*(1-p0) / n )
-z0Bivariate = (pBivariate - p0) / np.sqrt( p0*(1-p0) / n )
-
-def normalfunction(x):
-    return np.exp(-x**2/2)/np.sqrt(2*np.pi)
-
-integrateKernel,err1 = quad(normalfunction, -1000, z0Kernel)
-integrateBivariate,err2 = quad(normalfunction, -1000, z0Bivariate)
-
-p_valueKernel = 1 - integrateKernel
-p_valueBivariate = 1 - integrateBivariate
-
-print("\nP-value for Kernel : " + str(p_valueKernel) )
-print("\nP-value for Bivariate : " + str(p_valueBivariate) )

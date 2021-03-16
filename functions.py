@@ -274,3 +274,40 @@ def update_axis_arrays(xx, yy, type="kernel"):
         for i in range(0, len(xx)):
             x[i] = xx[i][0]
     return x, y
+
+def compute_empirical_VaR(returns, alpha):
+    """
+    Compute VaR from density distribution
+    :param returns:         density indexes [1D array]
+    :param alpha:           confidence level [%]
+    :return:                VaR [float]
+    """
+    returns = np.sort(returns)
+    index = int(len(returns) * (1-alpha))
+    return round(returns[index], 3)
+
+def compute_semi_deviation(X, side='lower'):
+    mean = np.mean(X)
+    if side == "upper":
+        X = X[X-mean >= 0]
+    elif side == "lower":
+        X = X[X-mean < 0]
+    else:
+        return "Side must be either 'upper' or 'lower'"
+    return X.std()
+
+def compute_MDD(X):
+    i = np.argmax(np.maximum.accumulate(X) - X)  # end of the period
+    j = np.argmax(X[:i])  # start of period
+    return [i, j]
+
+def compute_skewness(returns):
+    mean = np.mean(returns)
+    return np.mean(np.power((returns - mean) / returns.std(), 3))
+
+def compute_kurtosis(returns):
+    mean = np.mean(returns)
+    return np.mean(np.power((returns - mean) / returns.std(), 4))
+
+def normalfunction(x):
+    return np.exp(-x**2/2)/np.sqrt(2*np.pi)
