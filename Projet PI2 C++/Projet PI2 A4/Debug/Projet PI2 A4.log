@@ -1,0 +1,21 @@
+﻿  Projet PI2 A4.cpp
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(77,16): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(293,23): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(319,46): warning C4244: 'argument' : conversion de '_Ty' en 'const unsigned int', perte possible de données
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(320,50): warning C4244: 'argument' : conversion de '_Ty' en 'const unsigned int', perte possible de données
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(321,23): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(343,27): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(348,27): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(362,23): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(428,27): warning C4018: '<' : incompatibilité signed/unsigned
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(501,20): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+C:\Users\gaelm\source\repos\Projet PI2 A4\Projet PI2 A4\Projet PI2 A4.cpp(463,12): warning C4101: 'nb' : variable locale non référencée
+  Projet PI2 A4.vcxproj -> C:\Users\gaelm\source\repos\Projet PI2 A4\Debug\Projet PI2 A4.exe
